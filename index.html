@@ -172,14 +172,7 @@ function generatePassword(){
     return;
   }
 
-    if(useNumbers && !useLower && !useUpper && !useSymbols && length > 7){
-    alert(
-      lang === "ar"
-      ? "لا توجد كلمة مرور بهذا الطول، شكراً لتفهمكم 🙂"
-      : "There is no password with this length. Thank you for your understanding 🙂"
-    );
-    return;
-  }
+
 
   let pass = "";
   for(let i=0;i<length;i++){
@@ -226,4 +219,5 @@ function toggleLang(){
 
 </body>
 </html>
+
 
