@@ -1,118 +1,217 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>مولد كلمات مرور قوية وآمنة</title>
-  <meta name="description" content="مولد كلمات مرور قوية وآمنة مجاناً. أنشئ كلمة مرور عشوائية خلال ثوانٍ بدون تسجيل.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>مولد كلمات مرور قوية</title>
+<meta name="description" content="مولد كلمات مرور قوية وآمنة. تحكم كامل في نوع الأحرف مع زر نسخ فوري ودعم عربي وإنجليزي.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+:root{
+  --primary:#0b525a;
+  --secondary:#bdbb87;
+}
 
-    .container {
-      max-width: 400px;
-      margin: 50px auto;
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: center;
-    }
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f4f6f6;
+}
 
-    h1 {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
+.container{
+  max-width:420px;
+  margin:40px auto;
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
 
-    input[type="number"] {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-    }
+h1{
+  text-align:center;
+  color:var(--primary);
+  font-size:22px;
+}
 
-    label {
-      display: block;
-      text-align: right;
-      margin: 5px 0;
-    }
+.lang-switch{
+  text-align:center;
+  margin-bottom:10px;
+}
 
-    button {
-      background: #007bff;
-      color: #fff;
-      border: none;
-      padding: 10px;
-      width: 100%;
-      cursor: pointer;
-      border-radius: 5px;
-      font-size: 16px;
-    }
+.lang-switch button{
+  background:var(--secondary);
+  border:none;
+  padding:6px 10px;
+  cursor:pointer;
+  border-radius:5px;
+}
 
-    button:hover {
-      background: #0056b3;
-    }
+label{
+  display:block;
+  margin:8px 0;
+}
 
-    .result {
-      margin-top: 15px;
-      background: #eee;
-      padding: 10px;
-      word-break: break-all;
-      border-radius: 5px;
-      font-weight: bold;
-    }
+input[type="number"]{
+  width:100%;
+  padding:8px;
+  margin-bottom:10px;
+}
 
-    footer {
-      margin-top: 20px;
-      font-size: 12px;
-      color: #777;
-    }
-  </style>
+.options{
+  margin-bottom:10px;
+}
+
+.options label{
+  font-size:14px;
+}
+
+button.main{
+  width:100%;
+  padding:10px;
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+.result{
+  margin-top:15px;
+  padding:10px;
+  background:#eee;
+  border-radius:6px;
+  word-break:break-all;
+  text-align:center;
+  font-weight:bold;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+
+.actions button{
+  flex:1;
+  padding:8px;
+  border:none;
+  cursor:pointer;
+  border-radius:6px;
+  background:var(--secondary);
+}
+
+.message{
+  margin-top:8px;
+  text-align:center;
+  color:green;
+  font-size:13px;
+  display:none;
+}
+
+footer{
+  margin-top:15px;
+  text-align:center;
+  font-size:12px;
+  color:#666;
+}
+
+@media(max-width:480px){
+  .container{margin:20px;}
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
-  <h1>🔐 مولد كلمات مرور قوية</h1>
-  <p>أنشئ كلمة مرور آمنة خلال ثوانٍ</p>
+  <div class="lang-switch">
+    <button onclick="toggleLang()">English</button>
+  </div>
 
-  <label>طول كلمة المرور:</label>
-  <input type="number" id="length" value="12" min="6" max="32">
+  <h1 id="title">🔐 مولد كلمات مرور قوية</h1>
 
-  <label><input type="checkbox" id="uppercase" checked> أحرف كبيرة</label>
-  <label><input type="checkbox" id="numbers" checked> أرقام</label>
-  <label><input type="checkbox" id="symbols" checked> رموز</label>
+  <label id="lenLabel">طول كلمة المرور</label>
+  <input type="number" id="length" value="12" min="4" max="32">
 
-  <button onclick="generatePassword()">توليد كلمة المرور</button>
+  <div class="options">
+    <label><input type="checkbox" id="lowercase" checked> <span id="lowText">أحرف صغيرة</span></label>
+    <label><input type="checkbox" id="uppercase"> <span id="upText">أحرف كبيرة</span></label>
+    <label><input type="checkbox" id="numbers"> <span id="numText">أرقام</span></label>
+    <label><input type="checkbox" id="symbols"> <span id="symText">رموز</span></label>
+  </div>
+
+  <button class="main" onclick="generatePassword()" id="genBtn">توليد كلمة المرور</button>
 
   <div class="result" id="result">—</div>
 
-  <footer>
-    لا يتم حفظ أي كلمة مرور 🔒
-  </footer>
+  <div class="actions">
+    <button onclick="copyPassword()" id="copyBtn">نسخ</button>
+    <button onclick="clearPassword()" id="clearBtn">مسح</button>
+  </div>
+
+  <div class="message" id="msg">✔ تم النسخ</div>
+
+  <footer id="footer">لا يتم حفظ أي بيانات 🔒</footer>
 </div>
 
 <script>
-function generatePassword() {
-  const length = document.getElementById("length").value;
-  const useUppercase = document.getElementById("uppercase").checked;
-  const useNumbers = document.getElementById("numbers").checked;
-  const useSymbols = document.getElementById("symbols").checked;
+let lang = "ar";
 
-  let chars = "abcdefghijklmnopqrstuvwxyz";
-  if (useUppercase) chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  if (useNumbers) chars += "0123456789";
-  if (useSymbols) chars += "!@#$%^&*()_+-=[]{}|;:,.<>?";
+function generatePassword(){
+  const length = +document.getElementById("length").value;
+  let chars = "";
 
-  let password = "";
-  for (let i = 0; i < length; i++) {
-    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  if(document.getElementById("lowercase").checked) chars += "abcdefghijklmnopqrstuvwxyz";
+  if(document.getElementById("uppercase").checked) chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  if(document.getElementById("numbers").checked) chars += "0123456789";
+  if(document.getElementById("symbols").checked) chars += "!@#$%^&*()_+-=[]{}|;:,.<>?";
+
+  if(chars === ""){
+    alert(lang==="ar" ? "اختر نوع أحرف واحد على الأقل" : "Select at least one option");
+    return;
   }
 
-  document.getElementById("result").innerText = password;
+  let pass = "";
+  for(let i=0;i<length;i++){
+    pass += chars[Math.floor(Math.random()*chars.length)];
+  }
+
+  document.getElementById("result").innerText = pass;
+  document.getElementById("msg").style.display="none";
+}
+
+function copyPassword(){
+  const text = document.getElementById("result").innerText;
+  if(text==="—") return;
+  navigator.clipboard.writeText(text);
+  document.getElementById("msg").style.display="block";
+}
+
+function clearPassword(){
+  document.getElementById("result").innerText="—";
+  document.getElementById("msg").style.display="none";
+}
+
+function toggleLang(){
+  if(lang==="ar"){
+    lang="en";
+    document.documentElement.dir="ltr";
+    document.getElementById("title").innerText="🔐 Strong Password Generator";
+    document.getElementById("lenLabel").innerText="Password Length";
+    document.getElementById("lowText").innerText="Lowercase";
+    document.getElementById("upText").innerText="Uppercase";
+    document.getElementById("numText").innerText="Numbers";
+    document.getElementById("symText").innerText="Symbols";
+    document.getElementById("genBtn").innerText="Generate Password";
+    document.getElementById("copyBtn").innerText="Copy";
+    document.getElementById("clearBtn").innerText="Clear";
+    document.getElementById("footer").innerText="No data is stored 🔒";
+    document.querySelector(".lang-switch button").innerText="العربية";
+    document.getElementById("msg").innerText="✔ Copied";
+  }else{
+    location.reload();
+  }
 }
 </script>
 
