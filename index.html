@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>مولد كلمات مرور قوية وآمنة</title>
+  <meta name="description" content="مولد كلمات مرور قوية وآمنة مجاناً. أنشئ كلمة مرور عشوائية خلال ثوانٍ بدون تسجيل.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    label {
+      display: block;
+      text-align: right;
+      margin: 5px 0;
+    }
+
+    button {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .result {
+      margin-top: 15px;
+      background: #eee;
+      padding: 10px;
+      word-break: break-all;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🔐 مولد كلمات مرور قوية</h1>
+  <p>أنشئ كلمة مرور آمنة خلال ثوانٍ</p>
+
+  <label>طول كلمة المرور:</label>
+  <input type="number" id="length" value="12" min="6" max="32">
+
+  <label><input type="checkbox" id="uppercase" checked> أحرف كبيرة</label>
+  <label><input type="checkbox" id="numbers" checked> أرقام</label>
+  <label><input type="checkbox" id="symbols" checked> رموز</label>
+
+  <button onclick="generatePassword()">توليد كلمة المرور</button>
+
+  <div class="result" id="result">—</div>
+
+  <footer>
+    لا يتم حفظ أي كلمة مرور 🔒
+  </footer>
+</div>
+
+<script>
+function generatePassword() {
+  const length = document.getElementById("length").value;
+  const useUppercase = document.getElementById("uppercase").checked;
+  const useNumbers = document.getElementById("numbers").checked;
+  const useSymbols = document.getElementById("symbols").checked;
+
+  let chars = "abcdefghijklmnopqrstuvwxyz";
+  if (useUppercase) chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  if (useNumbers) chars += "0123456789";
+  if (useSymbols) chars += "!@#$%^&*()_+-=[]{}|;:,.<>?";
+
+  let password = "";
+  for (let i = 0; i < length; i++) {
+    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+
+  document.getElementById("result").innerText = password;
+}
+</script>
+
+</body>
+</html>
